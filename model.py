@@ -6,7 +6,7 @@ import numpy as np
 
 
 class sakt(nn.Module):  
-    def __init__(self , ex_total , seq_len, dim , heads ):
+    def __init__(self , ex_total , seq_len, dim , heads, dout ):
         super(sakt, self).__init__()
         self.seq_len = seq_len
         self.dim = dim
@@ -16,13 +16,13 @@ class sakt(nn.Module):
         self.embd_pos = nn.Embedding( seq_len , embedding_dim = dim )
 
         self.linear = nn.ModuleList( [nn.Linear(in_features= dim , out_features= dim ) for x in range(3)] )   # Linear projection for each embedding 
-        self.attn = nn.MultiheadAttention(embed_dim= dim , num_heads= heads, dropout= 0.2 )                                   
+        self.attn = nn.MultiheadAttention(embed_dim= dim , num_heads= heads, dropout= dout )                                   
         self.ffn = nn.ModuleList([nn.Linear(in_features= dim , out_features=d, bias= True) for x in range(2)])  # feed forward layers post attention
 
         self.linear_out = nn.Linear(in_features= dim , out_features= 1 , bias=True) 
         self.layer_norm1 = nn.LayerNorm( dim )
         self.layer_norm2 = nn.LayerNorm( dim )                           # output with correctnness prediction 
-        self.drop = nn.Dropout(0.2)
+        self.drop = nn.Dropout(dout)
 
     def forward( self , input_in , input_ex):
 
@@ -64,7 +64,7 @@ class sakt(nn.Module):
 
           
 def randomdata():
-    input_in = torch.randint( 0 , 49 ,(64 , 12) ,  )
+    input_in = torch.randint( 0 , 49 ,(64 , 12) )
     return input_in, input_in
 
 
@@ -77,7 +77,7 @@ n = 12  # sequence length
 d1,d2 = randomdata()
 
 print( 'Input shape',d1.shape)
-model = sakt( ex_total= E , seq_len= n , dim= d , heads= 8 )
+model = sakt( ex_total= E , seq_len= n , dim= d , heads= 8, dout= 0.2 )
 out = model( d1, d2)
 print('Output shape', out.shape)
 
