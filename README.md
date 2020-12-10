@@ -1,10 +1,10 @@
 ## SAKT-pytorch  
 Pytorch Implementation of **"A Self-Attentive model for Knowledge Tracing"** based on https://arxiv.org/abs/1907.06837.    
-Given the past history of student in form of questions and answers, model tries to predict the correctness of student's future questions. Previous methods such as DKT, DKVMN etc, were based on RNN, however these model failed to generalize well when sparse data is used. SAKT model identifies the knowledge concepts from the student's past activities that are relevant for prediction future activities. Self Attention based approach is used to identify relevance between knowledge concepts.  
+Given the past history of student in form of questions and answers, model tries to predict the correctness of student's future questions. Previous methods such as DKT, DKVMN etc, were based on RNN, however these model failed to generalize well when sparse data is used. SAKT model identifies the knowledge concepts from the student's past activities that are relevant for prediction of future activities. Self Attention based approach is used to identify relevance between knowledge concepts.  
 (Note- This model was trained on [riiid dataset](https://www.kaggle.com/c/riiid-test-answer-prediction) that reached AUC 0.749 on validation set.)
 ### SAKT model architecture  
   
-<img src="https://github.com/arshadshk/SAKT-pytorch/from_paper.jpg">
+<img src="https://github.com/arshadshk/SAKT-pytorch/blob/main/from_paper.JPG">
   
 ## Usage 
 ```python
@@ -44,10 +44,10 @@ Dimension of embeddings.
 - `heads`: int.  
 No. of heads in multi-head attention.    
 - `dout`: int.  
-Dropout for feed forward layer.  
+Dropout for feed forward layer.    
 
 
-###  I would recommend you to have a look at [Tensorflow implementation](https://github.com/shalini1194/SAKT) of SAKT.
+I would recommend you to have a look at [Tensorflow implementation](https://github.com/shalini1194/SAKT) of SAKT.
 
 
 ## Citations
