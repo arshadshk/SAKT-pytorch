@@ -19,8 +19,6 @@ def randomdata():
     input_in = torch.randint( 0 , 49 ,(64 , 12) )
     return input_in, input_in
 
-
-
 d1,d2 = randomdata()
 
 
